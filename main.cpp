@@ -44,14 +44,14 @@ GLuint VBO[3], VAO[3], EBO[3];
 
 //Camera
 Camera camera(glm::vec3(0.0f, 10.0f, 3.0f));
-float MovementSpeed = 0.1f;
+float MovementSpeed = 5.0f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 //Timing
-const int FPS = 60;
-const int LOOP_TIME = 100 / FPS; // = 16 milisec // 1000 millisec == 1 sec
+const int FPS = 80;
+const int LOOP_TIME = 120 / FPS; // = 16 milisec // 1000 millisec == 1 sec
 double	deltaTime = 0.0f,
 lastFrame = 0.0f;
 
@@ -459,9 +459,18 @@ int main() {
 	// load models
 	// -----------
 	//Model piso("resources/objects/piso/piso.obj");
+	//Model TiendaGuitarras("resources/Models/TiendaMusica/TiendaGuitarras.obj");
+	//Model Aux("resources/Models/TiendaMusica/Auxiliar.obj");
+	//Model casaDoll("resources/Models/DollHouse.obj");
+	Model Piso("resources/Models/Piso/Piso.obj");
+	//Model TiendaGuitarras("resources/Models/TiendaMusica/TiendaGuitarras.obj");
+	Model Acuario("resources/Models/Acuario/Acuario.obj");
+	//Model Juegos("resources/Models/Videojuegos/Juegos.obj");
+	//Model TiendaRopa("resources/Models/Ropa/TiendaRopa.obj");
+	//Model Helados("resources/Models/Helados/Helados.obj");
+	//Model Cine("resources/Models/Cine/cine.obj");
+	//Model muro("resources/Models/muro.obj");
 	
-
-
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
 
@@ -601,27 +610,6 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		myShader.use();
 
-		//Tener Piso como referencia
-		glBindVertexArray(VAO[2]);
-		//Colocar código aquí
-		modelOp = glm::scale(glm::mat4(1.0f), glm::vec3(40.0f, 2.0f, 40.0f));
-		modelOp = glm::translate(modelOp, glm::vec3(0.0f, -1.0f, 0.0f));
-		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", 1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, t_piso);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-		glBindVertexArray(VAO[0]);
-		//Colocar código aquí
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 10.0f, 0.0f));
-		modelOp = glm::scale(modelOp, glm::vec3(5.0f, 5.0f, 1.0f));
-		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", 1.0f, 1.0f, 1.0f);
-		//glBindTexture(GL_TEXTURE_2D, t_unam);
-		glBindTexture(GL_TEXTURE_2D, t_cubo);
-		//glDrawArrays(GL_TRIANGLES, 0, 36); //A lonely cube :(
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		/***   Segundo objeto  **/
 
@@ -645,11 +633,43 @@ int main() {
 		staticShader.setMat4("projection", projectionOp);
 		staticShader.setMat4("view", viewOp);
 
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -5.0f, 0.0f));
+		staticShader.setMat4("model", modelOp);
+		Piso.Draw(staticShader);
 
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Carro
-		// -------------------------------------------------------------------------------------------------------------------------
-		//modelOp = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, 2.0f, 20.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(0.1f));
+		staticShader.setMat4("model", modelOp);
+		//TiendaGuitarras.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 2.0f, -40.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(0.1f));
+		staticShader.setMat4("model", modelOp);
+		Acuario.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(50.0f, 2.0f, 40.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(0.001f));
+		staticShader.setMat4("model", modelOp);
+		//Juegos.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 2.0f, -40.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(0.01f));
+		staticShader.setMat4("model", modelOp);
+		//TiendaRopa.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(150.0f, 2.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(10.0f));
+		staticShader.setMat4("model", modelOp);
+		//Helados.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(200.0f, 2.0f, -40.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(10.0f));
+		staticShader.setMat4("model", modelOp);
+		//Cine.Draw(staticShader);
+		
+
+		//TiendaGuitarras.Draw(staticShader);	//Tienda Guitarras
 		
 		//-------------------------------------------------------------------------------------
 		// draw skybox as last
