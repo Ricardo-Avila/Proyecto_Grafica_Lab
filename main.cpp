@@ -464,12 +464,14 @@ int main() {
 	//Model casaDoll("resources/Models/DollHouse.obj");
 	Model Piso("resources/Models/Piso/Piso.obj");
 	//Model TiendaGuitarras("resources/Models/TiendaMusica/TiendaGuitarras.obj");
-	Model Acuario("resources/Models/Acuario/Acuario.obj");
+	//Model Acuario("resources/Models/Acuario/Acuario.obj");
 	//Model Juegos("resources/Models/Videojuegos/Juegos.obj");
 	//Model TiendaRopa("resources/Models/Ropa/TiendaRopa.obj");
 	//Model Helados("resources/Models/Helados/Helados.obj");
 	//Model Cine("resources/Models/Cine/cine.obj");
-	//Model muro("resources/Models/muro.obj");
+
+	Model Mall("resources/Models/Mall.obj");
+	//Model Tiendas("resources/Models/Tiendas.obj");
 	
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -637,6 +639,13 @@ int main() {
 		staticShader.setMat4("model", modelOp);
 		Piso.Draw(staticShader);
 
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 2.0f, 20.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.0f));
+		staticShader.setMat4("model", modelOp);
+		//Aux01.Draw(staticShader);
+		Mall.Draw(staticShader);
+		//Tiendas.Draw(staticShader);
+
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, 2.0f, 20.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelOp = glm::scale(modelOp, glm::vec3(0.1f));
@@ -646,7 +655,7 @@ int main() {
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 2.0f, -40.0f));
 		modelOp = glm::scale(modelOp, glm::vec3(0.1f));
 		staticShader.setMat4("model", modelOp);
-		Acuario.Draw(staticShader);
+		//Acuario.Draw(staticShader);
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(50.0f, 2.0f, 40.0f));
 		modelOp = glm::scale(modelOp, glm::vec3(0.001f));
